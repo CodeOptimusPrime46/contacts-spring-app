@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     AuthServiceImpl(UserRepository userRepository) {
