@@ -26,7 +26,7 @@ public class SecurityConfig {
                 authorizeRequests
                     .requestMatchers("/").permitAll()
                     .requestMatchers("/contact/read-all").hasAuthority("ROLE_ADMIN")
-                    .requestMatchers("/contact").authenticated();
+                    .requestMatchers("/contact/**").authenticated();
             })
             .httpBasic(Customizer.withDefaults());
         return httpSecurity.build();
@@ -37,13 +37,13 @@ public class SecurityConfig {
         UserDetails admin = User.builder()
             .username("admin")
             .password(passwordEncoder().encode("password"))
-            .roles("USER")
+            .authorities("ROLE_ADMIN")
             .build();
 
         UserDetails kar = User.builder()
             .username("kar")
             .password(passwordEncoder().encode("kar@123"))
-            .roles("ADMIN")
+            .authorities("ROLE_ADMIN")
             .build();
 
         return new InMemoryUserDetailsManager(admin, kar);
